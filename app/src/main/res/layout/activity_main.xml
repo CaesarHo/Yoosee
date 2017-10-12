@@ -8,6 +8,10 @@
     android:orientation="vertical"
     tools:context="com.home.yoosee.MainActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
