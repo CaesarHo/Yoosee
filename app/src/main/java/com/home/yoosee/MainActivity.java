@@ -12,19 +12,15 @@ import android.widget.Toast;
 
 import com.home.yoosee.widget.CoordinatorMenu;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.ibtn_left)
-    ImageButton ibtnLeft;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    private ImageButton iBtn_left;
     private CoordinatorMenu mCoordinatorMenu;
     private TextView mTextMessage;
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
@@ -55,11 +51,17 @@ public class MainActivity extends AppCompatActivity {
 
         //侧滑代码
         mCoordinatorMenu = (CoordinatorMenu) findViewById(R.id.menu);
+        initView();
+    }
+
+    public void initView() {
+        iBtn_left = (ImageButton) findViewById(R.id.ibtn_left);
+        iBtn_left.setOnClickListener(this);
     }
 
     @OnClick({R.id.ibtn_left})
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ibtn_left:
                 if (mCoordinatorMenu.isOpened()) {
                     mCoordinatorMenu.closeMenu();
@@ -72,30 +74,24 @@ public class MainActivity extends AppCompatActivity {
 
 
     //退出时间
-    private long  currentBackPressedTime= 0;
+    private long currentBackPressedTime = 0;
     //退出间隔
-    private static final int BACK_PRESSED_INTERVAL= 2000;
+    private static final int BACK_PRESSED_INTERVAL = 2000;
+
     @Override
     public void onBackPressed() {
         if (mCoordinatorMenu.isOpened()) {
             mCoordinatorMenu.closeMenu();
         } else {
             //判断时间间隔
-            if(System.currentTimeMillis()-currentBackPressedTime>BACK_PRESSED_INTERVAL) {
-                currentBackPressedTime= System.currentTimeMillis();
-                Toast.makeText(this,"再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
-            }else{
+            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
+                currentBackPressedTime = System.currentTimeMillis();
+                Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
+            } else {
                 //退出
                 finish();
             }
             super.onBackPressed();
         }
-
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
     }
 }
