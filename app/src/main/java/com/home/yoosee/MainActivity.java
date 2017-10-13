@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -75,23 +76,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     //退出时间
     private long currentBackPressedTime = 0;
-    //退出间隔
-    private static final int BACK_PRESSED_INTERVAL = 2000;
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (mCoordinatorMenu.isOpened()) {
             mCoordinatorMenu.closeMenu();
+            return false;
         } else {
-            //判断时间间隔
-            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
-                currentBackPressedTime = System.currentTimeMillis();
-                Toast.makeText(this, "再按一次返回键退出程序", Toast.LENGTH_SHORT).show();
-            } else {
-                //退出
-                finish();
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+                if ((System.currentTimeMillis() - currentBackPressedTime) > 2000) {
+                    Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                    currentBackPressedTime = System.currentTimeMillis();
+                } else {
+                    finish();
+                    System.exit(0);
+                }
+                return true;
             }
-            super.onBackPressed();
         }
+        return super.onKeyDown(keyCode, event);
     }
 }
