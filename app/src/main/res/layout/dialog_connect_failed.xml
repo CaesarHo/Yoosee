@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="360dp"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_back"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:text="@string/conn_fail"
+        android:textColor="@color/text_color_black"
+        android:textSize="@dimen/text_size_normal" />
+
+    <ImageView
+        android:layout_width="239dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@mipmap/connect_failed" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/reason"
+        android:textColor="@color/text_color_black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_failed_reason1"
+        android:textColor="@color/text_color_black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_failed_reason2"
+        android:textColor="@color/text_color_black" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/connect_failed_reason3"
+        android:textColor="@color/text_color_black" />
+
+    <Button
+        android:id="@+id/try_again"
+        style="@style/button_bottom_small_style"
+        android:layout_width="150dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:text="@string/try_again"
+        android:textSize="@dimen/text_size_small" />
+
+    <Button
+        android:id="@+id/try_qrecode"
+        style="@style/button_bottom_small_style"
+        android:layout_width="150dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center"
+        android:text="@string/use_qrecode"
+        android:textSize="@dimen/text_size_small" />
+
+</LinearLayout>

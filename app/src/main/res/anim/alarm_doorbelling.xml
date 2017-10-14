@@ -1,0 +1,37 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" >
+
+    <item
+        android:drawable="@mipmap/doorbell3"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/alarm_doorbell4"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/doorbell1"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/alarm_doorbell4"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/doorbell3"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/alarm_doorbell5"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/doorbell2"
+        android:duration="150">
+    </item>
+    <item
+        android:drawable="@mipmap/alarm_doorbell5"
+        android:duration="150">
+    </item>
+
+</set>

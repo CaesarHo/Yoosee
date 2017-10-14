@@ -1,0 +1,42 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/selector_dialog_width"
+    android:layout_height="100dp"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_back"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/selector_dialog_title_height"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/inner_margin_left"
+        android:text="@string/operator"
+        android:textColor="@color/dialog_title_color"
+        android:textSize="@dimen/text_size_normal"
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@mipmap/list_item_line"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/content_text"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/selector_dialog_margin"
+        android:cacheColorHint="@null"
+        android:divider="@mipmap/list_item_line"
+        android:dividerHeight="@dimen/selector_dialog_separator_height"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:scrollbars="none" />
+
+</RelativeLayout>

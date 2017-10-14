@@ -1,0 +1,22 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@mipmap/point5"
+        android:duration="300"></item>
+    <item
+        android:drawable="@mipmap/point4"
+        android:duration="300"></item>
+    <item
+        android:drawable="@mipmap/point3"
+        android:duration="300"></item>
+
+    <item
+        android:drawable="@mipmap/point2"
+        android:duration="300"></item>
+    <item
+        android:drawable="@mipmap/point1"
+        android:duration="300"></item>
+
+
+</set>

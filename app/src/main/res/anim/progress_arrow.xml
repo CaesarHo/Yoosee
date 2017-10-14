@@ -1,0 +1,7 @@
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@mipmap/ic_progress_arrow"
+    android:duration="560000"
+    android:fromDegrees="0"
+    android:pivotX="50%"
+    android:pivotY="50%"
+    android:toDegrees="108000" />

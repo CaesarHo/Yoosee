@@ -1,0 +1,12 @@
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item
+        android:drawable="@mipmap/movie1"
+        android:duration="150"></item>
+    <item
+        android:drawable="@mipmap/movie2"
+        android:duration="150"></item>
+    <item
+        android:drawable="@mipmap/movie3"
+        android:duration="150"></item>
+</set>

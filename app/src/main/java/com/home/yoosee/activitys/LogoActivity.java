@@ -9,9 +9,8 @@ import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.home.yoosee.MainActivity;
 import com.home.yoosee.R;
-import com.home.yoosee.base.YooseeApp;
+import com.home.yoosee.base.MyApp;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -111,7 +110,7 @@ public class LogoActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
         findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
-        YooseeApp.getInstance().getMainHandler().postDelayed(new Runnable() {
+        MyApp.app.getMainHandler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 Intent i = new Intent(LogoActivity.this, MainActivity.class);
