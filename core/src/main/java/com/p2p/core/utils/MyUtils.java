@@ -47,6 +47,7 @@ public class MyUtils {
 				Log.i("cpuversion", "version" + version);
 			}
 		} catch (Exception e) {
+			e.getMessage();
 		}
 		return version;
 	}

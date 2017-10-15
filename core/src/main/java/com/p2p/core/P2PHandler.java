@@ -106,7 +106,6 @@ public class P2PHandler {
 	private P2PHandler() {
 	}
 
-	;
 
 	public synchronized static P2PHandler getInstance() {
 		if (null == manager) {
@@ -120,8 +119,7 @@ public class P2PHandler {
 	/**
 	 * 初始化
 	 */
-	public void p2pInit(Context context, IP2P p2pListener,
-			ISetting settingListener) {
+	public void p2pInit(Context context, IP2P p2pListener, ISetting settingListener) {
 		MediaPlayer.getInstance().setP2PInterface(p2pListener);
 		MediaPlayer.getInstance().setSettingInterface(settingListener);
 	}

@@ -149,22 +149,15 @@ public class Utils {
 		new Thread() {
 			@Override
 			public void run() {
-
 				boolean isUpdate;
 				boolean isOk = false;
 				try {
 					Timestamp time = new Timestamp(System.currentTimeMillis());
-					String recent_checkTime = SharedPreferencesManager
-							.getInstance()
-							.getData(
-									context,
-									SharedPreferencesManager.SP_FILE_GWELL,
-									SharedPreferencesManager.KEY_UPDATE_CHECKTIME);
+					String recent_checkTime = SharedPreferencesManager.getInstance().getData(context, SharedPreferencesManager.KEY_UPDATE_CHECKTIME);
 					if (recent_checkTime.equals("")) {
 						isOk = true;
 					} else {
-						Timestamp recentTime = Timestamp
-								.valueOf(recent_checkTime);
+						Timestamp recentTime = Timestamp.valueOf(recent_checkTime);
 						long now = time.getTime();
 						long last = recentTime.getTime();
 						if ((now - last) > (1000 * 60 * 60 * 24)) {
@@ -176,24 +169,18 @@ public class Utils {
 					}
 					isUpdate = UpdateManager.getInstance().checkUpdate();
 					if (isUpdate && isOk) {
-						SharedPreferencesManager.getInstance().putData(context,
-								SharedPreferencesManager.SP_FILE_GWELL,
-								SharedPreferencesManager.KEY_UPDATE_CHECKTIME,
-								time.toString());
+						SharedPreferencesManager.getInstance().putData(context, SharedPreferencesManager.KEY_UPDATE_CHECKTIME, time.toString());
 						Intent i = new Intent(Constants.Action.ACTION_UPDATE);
 						String data = "";
 						if (Utils.isZh(MyApp.app)) {
-							data = UpdateManager.getInstance()
-									.getUpdateDescription();
+							data = UpdateManager.getInstance().getUpdateDescription();
 						} else {
-							data = UpdateManager.getInstance()
-									.getUpdateDescription_en();
+							data = UpdateManager.getInstance().getUpdateDescription_en();
 						}
 						i.putExtra("updateDescription", data);
 						context.sendBroadcast(i);
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -202,15 +189,13 @@ public class Utils {
 
 	public static void showPromptDialog(Context context, int title, int content) {
 		NormalDialog dialog = new NormalDialog(context, context.getResources()
-				.getString(title), context.getResources().getString(content),
-				"", "");
+				.getString(title), context.getResources().getString(content), "", "");
 		dialog.setStyle(NormalDialog.DIALOG_STYLE_PROMPT);
 		dialog.showDialog();
 	}
 
 	public static String intToIp(int ip) {
-		return (ip & 0xFF) + "." + ((ip >> 8) & 0xff) + "."
-				+ ((ip >> 16) & 0xff) + "." + ((ip >> 24) & 0xff);
+		return (ip & 0xFF) + "." + ((ip >> 8) & 0xff) + "." + ((ip >> 16) & 0xff) + "." + ((ip >> 24) & 0xff);
 	}
 
 	public static HashMap getHash(String string) {
@@ -229,13 +214,11 @@ public class Utils {
 	}
 
 	public static String getFormatTellDate(Context context, String time) {
-
 		String year = context.getString(R.string.year_format);
 		String month = context.getString(R.string.month_format);
 		String day = context.getString(R.string.day_format);
 
-		SimpleDateFormat sd = new SimpleDateFormat("yyyy" + year + "MM" + month
-				+ "dd" + day + " HH:mm");
+		SimpleDateFormat sd = new SimpleDateFormat("yyyy" + year + "MM" + month + "dd" + day + " HH:mm");
 		Date dt = null;
 		try {
 			dt = new Date(Long.parseLong(time));
@@ -246,7 +229,6 @@ public class Utils {
 		if (dt != null) {
 			s = sd.format(dt);
 		}
-
 		return s;
 	}
 
@@ -254,7 +236,6 @@ public class Utils {
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

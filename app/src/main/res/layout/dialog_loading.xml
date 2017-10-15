@@ -7,9 +7,10 @@
 
     <TextView
         android:id="@+id/title_text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/loading_dialog_title_height"
-        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/inner_margin_left"
+        android:gravity="center"
         android:text="@string/check_update"
         android:textColor="@color/dialog_title_color"
         android:textSize="@dimen/text_size_normal"
@@ -22,12 +23,17 @@
         android:scaleType="center"
         android:src="@mipmap/list_item_line" />
 
-    <ProgressBar
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="@dimen/progress_width_height"
-        android:layout_height="@dimen/progress_width_height"
-        android:layout_gravity="center"
-        android:indeterminateDrawable="@anim/progress_white"
-        android:indeterminateDuration="560000" />
+    <RelativeLayout
+        android:id="@+id/dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/loading_dialog_content_height">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="@dimen/progress_width_height"
+            android:layout_height="@dimen/progress_width_height"
+            android:layout_centerInParent="true"
+            android:indeterminateDrawable="@anim/progress_white"
+            android:indeterminateDuration="560000" />
+    </RelativeLayout>
 </LinearLayout>

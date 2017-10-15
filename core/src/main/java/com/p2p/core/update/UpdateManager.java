@@ -194,7 +194,6 @@ public class UpdateManager {
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			isDowning = false;
 			isSuccess = false;
 			e.printStackTrace();

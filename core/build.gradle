@@ -11,11 +11,15 @@ android {
     defaultConfig {
         minSdkVersion 22
         targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "00.46.00.07"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+
+        ndk {
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
     }
     buildTypes {
         release {

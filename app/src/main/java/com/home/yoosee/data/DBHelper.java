@@ -79,40 +79,25 @@ public class DBHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		if (oldVersion < 10) {
-			String recentName = SharedPreferencesManager.getInstance().getData(
-					MyApp.app, SharedPreferencesManager.SP_FILE_GWELL,
-					SharedPreferencesManager.KEY_RECENTNAME);
+			String recentName = SharedPreferencesManager.getInstance().getData(MyApp.app, SharedPreferencesManager.KEY_RECENTNAME);
 			if (!recentName.equals("")) {
 				if (recentName.charAt(0) != '0') {
-					SharedPreferencesManager.getInstance().putData(MyApp.app,
-							SharedPreferencesManager.SP_FILE_GWELL,
-							SharedPreferencesManager.KEY_RECENTNAME_EMAIL,
-							"0" + recentName);
+					SharedPreferencesManager.getInstance().putData(MyApp.app,SharedPreferencesManager.KEY_RECENTNAME_EMAIL,"0"+recentName);
 				} else {
-					SharedPreferencesManager.getInstance().putData(MyApp.app,
-							SharedPreferencesManager.SP_FILE_GWELL,
-							SharedPreferencesManager.KEY_RECENTNAME_EMAIL,
-							recentName);
+					SharedPreferencesManager.getInstance().putData(MyApp.app, SharedPreferencesManager.KEY_RECENTNAME_EMAIL, recentName);
 				}
 			}
 
-			SharedPreferencesManager.getInstance().putData(MyApp.app,
-					SharedPreferencesManager.SP_FILE_GWELL,
-					SharedPreferencesManager.KEY_RECENTNAME, "");
-			SharedPreferencesManager.getInstance().putRecentLoginType(
-					MyApp.app, Constants.LoginType.EMAIL);
-
+			SharedPreferencesManager.getInstance().putData(MyApp.app, SharedPreferencesManager.KEY_RECENTNAME, "");
+			SharedPreferencesManager.getInstance().putRecentLoginType(MyApp.app, Constants.LoginType.EMAIL);
 		}
 
 		if (oldVersion < 13) {
-			Account account = AccountPersist.getInstance()
-					.getActiveAccountInfo(MyApp.app);
+			Account account = AccountPersist.getInstance().getActiveAccountInfo(MyApp.app);
 			if (null != account) {
 				account.three_number = "0" + account.three_number;
-				AccountPersist.getInstance().setActiveAccount(MyApp.app,
-						account);
-				NpcCommon.mThreeNum = AccountPersist.getInstance()
-						.getActiveAccountInfo(MyApp.app).three_number;
+				AccountPersist.getInstance().setActiveAccount(MyApp.app, account);
+				NpcCommon.mThreeNum = AccountPersist.getInstance().getActiveAccountInfo(MyApp.app).three_number;
 			}
 		}
 
@@ -136,18 +121,12 @@ public class DBHelper extends SQLiteOpenHelper {
 			List<Contact> lists = new ArrayList<Contact>();
 			if (cursor != null) {
 				while (cursor.moveToNext()) {
-					String contactName = cursor.getString(cursor
-							.getColumnIndex("name"));
-					String contactId = cursor.getString(cursor
-							.getColumnIndex("threeAccount"));
-					String contactPassword = cursor.getString(cursor
-							.getColumnIndex("threePwd"));
-					int contactType = cursor.getInt(cursor
-							.getColumnIndex("device_type"));
-					int messageCount = cursor.getInt(cursor
-							.getColumnIndex("msgCount"));
-					String activeUser = cursor.getString(cursor
-							.getColumnIndex("uId"));
+					String contactName = cursor.getString(cursor.getColumnIndex("name"));
+					String contactId = cursor.getString(cursor.getColumnIndex("threeAccount"));
+					String contactPassword = cursor.getString(cursor.getColumnIndex("threePwd"));
+					int contactType = cursor.getInt(cursor.getColumnIndex("device_type"));
+					int messageCount = cursor.getInt(cursor.getColumnIndex("msgCount"));
+					String activeUser = cursor.getString(cursor.getColumnIndex("uId"));
 					Contact data = new Contact();
 					data.contactName = contactName;
 					data.contactId = contactId;
@@ -166,11 +145,9 @@ public class DBHelper extends SQLiteOpenHelper {
 			db.execSQL(ContactDB.getCreateTableString());
 
 			for (Contact contact : lists) {
-
 				ContactDB contactDB = new ContactDB(db);
 				contactDB.insert(contact);
 			}
-
 		}
 
 		if (oldVersion < 22) {
@@ -178,14 +155,10 @@ public class DBHelper extends SQLiteOpenHelper {
 			Cursor cursor = db.rawQuery("SELECT * FROM alarm_record", null);
 			if (cursor != null) {
 				while (cursor.moveToNext()) {
-					String deviceId = cursor.getString(cursor
-							.getColumnIndex("deviceId"));
-					int alarmType = cursor.getInt(cursor
-							.getColumnIndex("alarmType"));
-					String alarmTime = cursor.getString(cursor
-							.getColumnIndex("alarmTime"));
-					String activeUser = cursor.getString(cursor
-							.getColumnIndex("activeUser"));
+					String deviceId = cursor.getString(cursor.getColumnIndex("deviceId"));
+					int alarmType = cursor.getInt(cursor.getColumnIndex("alarmType"));
+					String alarmTime = cursor.getString(cursor.getColumnIndex("alarmTime"));
+					String activeUser = cursor.getString(cursor.getColumnIndex("activeUser"));
 
 					AlarmRecord data = new AlarmRecord();
 					data.deviceId = deviceId;
@@ -206,25 +179,18 @@ public class DBHelper extends SQLiteOpenHelper {
 				AlarmRecordDB alarmRecordDB = new AlarmRecordDB(db);
 				alarmRecordDB.insert(record);
 			}
-
 		}
 		if(oldVersion <24){
 			Cursor cursor = db.rawQuery("SELECT * FROM contact", null);
 			List<Contact> lists = new ArrayList<Contact>();
 			if (cursor != null) {
 				while (cursor.moveToNext()) {
-					String contactName = cursor.getString(cursor
-							.getColumnIndex("contactName"));
-					String contactId = cursor.getString(cursor
-							.getColumnIndex("contactId"));
-					String contactPassword = cursor.getString(cursor
-							.getColumnIndex("contactPassword"));
-					int contactType = cursor.getInt(cursor
-							.getColumnIndex("contactType"));
-					int messageCount = cursor.getInt(cursor
-							.getColumnIndex("messageCount"));
-					String activeUser = cursor.getString(cursor
-							.getColumnIndex("activeUser"));
+					String contactName = cursor.getString(cursor.getColumnIndex("contactName"));
+					String contactId = cursor.getString(cursor.getColumnIndex("contactId"));
+					String contactPassword = cursor.getString(cursor.getColumnIndex("contactPassword"));
+					int contactType = cursor.getInt(cursor.getColumnIndex("contactType"));
+					int messageCount = cursor.getInt(cursor.getColumnIndex("messageCount"));
+					String activeUser = cursor.getString(cursor.getColumnIndex("activeUser"));
 					Contact data = new Contact();
 					data.contactName = contactName;
 					data.contactId = contactId;
@@ -247,7 +213,6 @@ public class DBHelper extends SQLiteOpenHelper {
 				ContactDB contactDB = new ContactDB(db);
 				contactDB.insert(contact);
 			}
-
 		}
 
 		onCreate(db);

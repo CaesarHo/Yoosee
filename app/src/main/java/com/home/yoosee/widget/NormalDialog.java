@@ -12,8 +12,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
+import android.webkit.WebView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -22,21 +24,24 @@ import android.widget.TextView;
 import com.home.yoosee.R;
 import com.home.yoosee.activitys.QRcodeActivity;
 import com.home.yoosee.adapters.SelectorDialogAdapter;
+import com.home.yoosee.base.MyApp;
+import com.home.yoosee.global.Constants;
+import com.home.yoosee.utils.T;
+import com.p2p.core.update.UpdateManager;
 import com.p2p.core.utils.MyUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class NormalDialog {
-	Context context;
-	String[] list_data = new String[] {};
-	String title_str, content_str, btn1_str, btn2_str;
-	AlertDialog dialog;
+public class NormalDialog implements OnClickListener{
+	private Context context;
+	private String[] list_data = new String[] {};
+	private String title_str, content1, btn1_str, btn2_str;
+	private AlertDialog dialog;
 	private OnButtonOkListener onButtonOkListener;
 	private OnButtonCancelListener onButtonCancelListener;
 	private OnCancelListener onCancelListener;
 	private OnDismissListener onDismissListener = new OnDismissListener() {
-
 		@Override
 		public void onDismiss(DialogInterface dialog) {
 			if (mTimer != null) {
@@ -53,11 +58,10 @@ public class NormalDialog {
 	public static final int DIALOG_STYLE_DOWNLOAD = 4;
 	public static final int DIALOG_STYLE_PROMPT = 5;
 
-	public NormalDialog(Context context, String title, String content,
-                        String btn1, String btn2) {
+	public NormalDialog(Context context, String title, String content, String btn1, String btn2) {
 		this.context = context;
 		this.title_str = title;
-		this.content_str = content;
+		this.content1 = content;
 		this.btn1_str = btn1;
 		this.btn2_str = btn2;
 	}
@@ -65,7 +69,6 @@ public class NormalDialog {
 	public NormalDialog(Context context) {
 		this.context = context;
 		this.title_str = "";
-		this.content_str = "";
 		this.btn1_str = "";
 		this.btn2_str = "";
 	}
@@ -91,7 +94,7 @@ public class NormalDialog {
 		View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading, null);
 		TextView title = (TextView) view.findViewById(R.id.title_text);
 		title.setText(title_str);
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -101,27 +104,21 @@ public class NormalDialog {
 		dialog.setOnCancelListener(onCancelListener);
 		dialog.setOnDismissListener(onDismissListener);
 		dialog.setCanceledOnTouchOutside(false);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showAboutDialog() {
-		View view = LayoutInflater.from(context).inflate(R.layout.dialog_about,
-				null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_about, null);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
 		TextView txVersion = (TextView) view.findViewById(R.id.tv_about);
 		txVersion.setText(MyUtils.getVersion());
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -131,38 +128,27 @@ public class NormalDialog {
 		view.setLayoutParams(layout);
 		dialog.setOnCancelListener(onCancelListener);
 		dialog.setCanceledOnTouchOutside(true);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
-	public void showDeviceInfoDialog(String curversion, String uBootVersion,
-			String kernelVersion, String rootfsVersion) {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_device_info, null);
-		TextView text_curversion = (TextView) view
-				.findViewById(R.id.text_curversion);
-		TextView text_uBootVersion = (TextView) view
-				.findViewById(R.id.text_uBootVersion);
-		TextView text_kernelVersion = (TextView) view
-				.findViewById(R.id.text_kernelVersion);
-		TextView text_rootfsVersion = (TextView) view
-				.findViewById(R.id.text_rootfsVersion);
+	public void showDeviceInfoDialog(String curversion, String uBootVersion, String kernelVersion, String rootfsVersion) {
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_device_info, null);
+		TextView text_curversion = (TextView) view.findViewById(R.id.text_curversion);
+		TextView text_uBootVersion = (TextView) view.findViewById(R.id.text_uBootVersion);
+		TextView text_kernelVersion = (TextView) view.findViewById(R.id.text_kernelVersion);
+		TextView text_rootfsVersion = (TextView) view.findViewById(R.id.text_rootfsVersion);
 		text_curversion.setText(curversion);
 		text_uBootVersion.setText(uBootVersion);
 		text_kernelVersion.setText(kernelVersion);
 		text_rootfsVersion.setText(rootfsVersion);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -172,14 +158,11 @@ public class NormalDialog {
 		view.setLayoutParams(layout);
 		dialog.setOnCancelListener(onCancelListener);
 		dialog.setCanceledOnTouchOutside(true);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showLoadingDialog2() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_loading2, null);
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_loading2, null);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -189,19 +172,16 @@ public class NormalDialog {
 		view.setLayoutParams(layout);
 		dialog.setOnCancelListener(onCancelListener);
 		dialog.setCanceledOnTouchOutside(false);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showNormalDialog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_normal, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_normal, null);
 		TextView title = (TextView) view.findViewById(R.id.title_text);
 		TextView content = (TextView) view.findViewById(R.id.content_text);
 		TextView button1 = (TextView) view.findViewById(R.id.button1_text);
 		TextView button2 = (TextView) view.findViewById(R.id.button2_text);
 		title.setText(title_str);
-		content.setText(content_str);
+		content.setText(content1);
 		button1.setText(btn1_str);
 		button2.setText(btn2_str);
 		button1.setOnClickListener(new OnClickListener() {
@@ -226,7 +206,7 @@ public class NormalDialog {
 				}
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		if (dialog.isShowing()) {
 			dialog.dismiss();
@@ -239,13 +219,10 @@ public class NormalDialog {
 
 		view.setLayoutParams(layout);
 		dialog.setCanceledOnTouchOutside(true);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showSelectorDialog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_selector, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_selector, null);
 		TextView title = (TextView) view.findViewById(R.id.title_text);
 		title.setText(title_str);
 
@@ -254,7 +231,7 @@ public class NormalDialog {
 		SelectorDialogAdapter adapter = new SelectorDialogAdapter(context, list_data);
 		content.setAdapter(adapter);
 		content.setOnItemClickListener(onItemClickListener);
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -269,23 +246,19 @@ public class NormalDialog {
 		LayoutParams layout = (LayoutParams) view.getLayoutParams();
 		layout.width = (int) context.getResources().getDimension(
 				R.dimen.selector_dialog_width);
-		layout.height = itemHeight * list_data.length + margin * 2
-				+ (list_data.length - 1) * separatorHeight;
+		layout.height = itemHeight * list_data.length + margin * 2 + (list_data.length - 1) * separatorHeight;
 		view.setLayoutParams(layout);
 		dialog.setCanceledOnTouchOutside(true);
 		dialog.setCancelable(true);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showPromptDialog() {
 
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_prompt, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_prompt, null);
 		TextView content = (TextView) view.findViewById(R.id.content_text);
 		TextView title = (TextView) view.findViewById(R.id.title_text);
 		TextView button2 = (TextView) view.findViewById(R.id.button2_text);
-		content.setText(content_str);
+		content.setText(content1);
 		title.setText(title_str);
 		button2.setOnClickListener(new OnClickListener() {
 			@Override
@@ -299,7 +272,7 @@ public class NormalDialog {
 				}
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -310,27 +283,20 @@ public class NormalDialog {
 		view.setLayoutParams(layout);
 		dialog.setCanceledOnTouchOutside(false);
 		dialog.setCancelable(true);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showPromoptDiaglog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_promopt_box2, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_promopt_box2, null);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
 		Button bt1 = (Button) view.findViewById(R.id.bt_determine);
 		bt1.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				if (null != dialog) {
@@ -338,7 +304,7 @@ public class NormalDialog {
 				}
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -349,29 +315,14 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_promopt_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showWaitConnectionDialog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_wait_connection, null);
-		// view.setOnClickListener(new OnClickListener(){
-		//
-		// @Override
-		// public void onClick(View arg0) {
-		// // TODO Auto-generated method stub
-		// if (null!=dialog) {
-		// dialog.dismiss();
-		// }
-		// }
-		//
-		// });
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_wait_connection, null);
 		ImageView anim_load = (ImageView) view.findViewById(R.id.anim_wait);
-		AnimationDrawable animationdrawable = (AnimationDrawable) anim_load
-				.getDrawable();
+		AnimationDrawable animationdrawable = (AnimationDrawable) anim_load.getDrawable();
 		animationdrawable.start();
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -382,25 +333,19 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_reming_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showQRcodehelp() {
-		View view = LayoutInflater.from(context).inflate(R.layout.dialog_help,
-				null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_help, null);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -411,25 +356,19 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_reming_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void successDialog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_success, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_success, null);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -440,36 +379,28 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_success_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void faildDialog() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_prompt_box1, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_promopt_box1, null);
 		view.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
-
 		});
 		Button bt1 = (Button) view.findViewById(R.id.bt_determine);
 		bt1.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				if (dialog != null) {
 					dialog.dismiss();
 				}
-
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -480,38 +411,21 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_promopt_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 	}
 
 	public void showConnectFail() {
-		View view = LayoutInflater.from(context).inflate(
-				R.layout.dialog_connect_failed, null);
-		view.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				// if (null!=dialog) {
-				// dialog.dismiss();
-				// }
-			}
-
-		});
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_connect_failed, null);
 		Button try_again = (Button) view.findViewById(R.id.try_again);
 		Button use_qrecode = (Button) view.findViewById(R.id.try_qrecode);
 		try_again.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				if (null != dialog) {
 					dialog.dismiss();
 				}
 			}
 		});
 		use_qrecode.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
 				// 跳转到二维码添加
@@ -522,7 +436,7 @@ public class NormalDialog {
 				context.startActivity(new Intent(context, QRcodeActivity.class));
 			}
 		});
-		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
 		dialog = builder.create();
 		dialog.show();
 		dialog.setContentView(view);
@@ -533,9 +447,68 @@ public class NormalDialog {
 		layout.height = (int) context.getResources().getDimension(
 				R.dimen.dialog_reming_height);
 		view.setLayoutParams(layout);
-		Window window = dialog.getWindow();
-		window.setWindowAnimations(R.style.dialog_normal);
 
+	}
+
+	public void showUpdateDialog(){
+		View view = LayoutInflater.from(context).inflate(R.layout.dialog_update, null);
+		TextView title = (TextView) view.findViewById(R.id.title_text);
+		WebView content = (WebView) view.findViewById(R.id.content_text);
+		TextView button1 = (TextView) view.findViewById(R.id.button1_text);
+		TextView button2 = (TextView) view.findViewById(R.id.button2_text);
+
+		title.setText(R.string.update);
+		content.setBackgroundColor(0); // 设置背景色
+		content.getBackground().setAlpha(0); // 设置填充透明度 范围：0-255
+
+		content.loadDataWithBaseURL(null, content1, "text/html", "utf-8", null);
+		button1.setText(R.string.update_now);
+		button2.setText(R.string.next_time);
+
+		button1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (null != dialog) {
+					dialog.dismiss();
+					dialog = null;
+				}
+				if (UpdateManager.getInstance().getIsDowning()) {
+					return;
+				}
+				MyApp.app.showDownNotification(UpdateManager.HANDLE_MSG_DOWNING, 0);
+				T.showShort(context, R.string.start_down);
+				new Thread() {
+					public void run() {
+						UpdateManager.getInstance().downloadApk(
+								MyApp.app.getMainHandler(), Constants.Update.SAVE_PATH, Constants.Update.FILE_NAME);
+					}
+				}.start();
+			}
+		});
+		button2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (null != dialog) {
+					dialog.cancel();
+				}
+			}
+		});
+
+		AlertDialog.Builder builder = new AlertDialog.Builder(context,R.style.dialog_normal);
+		dialog = builder.create();
+		dialog.show();
+		dialog.setContentView(view);
+		FrameLayout.LayoutParams layout = (FrameLayout.LayoutParams) view.getLayoutParams();
+		layout.width = (int) context.getResources().getDimension(R.dimen.update_dialog_width);
+		view.setLayoutParams(layout);
+		dialog.setCanceledOnTouchOutside(false);
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()){
+
+		}
 	}
 
 	public void setTitle(String title) {

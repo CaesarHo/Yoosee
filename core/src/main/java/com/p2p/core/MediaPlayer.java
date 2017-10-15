@@ -234,86 +234,67 @@ public class MediaPlayer {
 						getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GETTING_ALARM_BIND_ID
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GETTING_ALARM_BIND_ID - 1000)) {
-				settingInterface.ACK_vRetGetAlarmBindId(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetAlarmBindId(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SETTING_INIT_PASSWORD
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SETTING_INIT_PASSWORD - 1000)) {
-				settingInterface.ACK_vRetSetInitPassword(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetInitPassword(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SETTING_DEVICE_PASSWORD
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SETTING_DEVICE_PASSWORD - 1000)) {
-				settingInterface.ACK_vRetSetDevicePassword(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetDevicePassword(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_CHECK_DEVICE_PASSWORD
 					&& arg1 >= (Constants.MsgSection.MSG_ID_CHECK_DEVICE_PASSWORD - 1000)) {
-				settingInterface.ACK_vRetCheckDevicePassword(arg1,
-						getConvertAckResult(arg2));
-				Log.e("ACK_vRetCheckDevicePassword", "iDesID="+iDesID+"---"+"result="+getConvertAckResult(arg2));
+				settingInterface.ACK_vRetCheckDevicePassword(arg1, getConvertAckResult(arg2));
+
+				Log.i("ACK_vRetCheckDevicePassword","iDesID=");
+//				Log.e("ACK_vRetCheckDevicePassword", "iDesID="+iDesID+"---"+"result="+getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SETTING_DEFENCEAREA
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SETTING_DEFENCEAREA - 1000)) {
-				settingInterface.ACK_vRetSetDefenceArea(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetDefenceArea(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GETTING_DEFENCEAREA
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GETTING_DEFENCEAREA - 1000)) {
-				settingInterface.ACK_vRetGetDefenceArea(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetDefenceArea(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SETTING_WIFI
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SETTING_WIFI - 1000)) {
-				settingInterface.ACK_vRetSetWifi(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetWifi(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GETTING_WIFI_LIST
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GETTING_WIFI_LIST - 1000)) {
-				settingInterface.ACK_vRetGetWifiList(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetWifiList(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GETTING_RECORD_FILE_LIST
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GETTING_RECORD_FILE_LIST - 1000)) {
-				settingInterface.ACK_vRetGetRecordFileList(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetRecordFileList(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SEND_MESSAGE
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SEND_MESSAGE - 1000)) {
-				settingInterface.ACK_vRetMessage(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetMessage(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_SEND_CUSTOM_CMD
 					&& arg1 >= (Constants.MsgSection.MSG_ID_SEND_CUSTOM_CMD - 1000)) {
-				settingInterface.ACK_vRetCustomCmd(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetCustomCmd(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_CHECK_DEVICE_UPDATE
 					&& arg1 >= (Constants.MsgSection.MSG_ID_CHECK_DEVICE_UPDATE - 1000)) {
-				settingInterface.ACK_vRetCheckDeviceUpdate(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetCheckDeviceUpdate(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_CANCEL_DEVICE_UPDATE
 					&& arg1 >= (Constants.MsgSection.MSG_ID_CANCEL_DEVICE_UPDATE - 1000)) {
-				settingInterface.ACK_vRetCancelDeviceUpdate(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetCancelDeviceUpdate(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_DO_DEVICE_UPDATE
 					&& arg1 >= (Constants.MsgSection.MSG_ID_DO_DEVICE_UPDATE - 1000)) {
-				settingInterface.ACK_vRetDoDeviceUpdate(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetDoDeviceUpdate(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GET_DEFENCE_STATE
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GET_DEFENCE_STATE - 1000)) {
-				settingInterface
-						.ACK_vRetGetDefenceStates(String.valueOf(iDesID), arg1,
-								getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetDefenceStates(String.valueOf(iDesID), arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_GET_DEVICE_VERSION
 					&& arg1 >= (Constants.MsgSection.MSG_ID_GET_DEVICE_VERSION - 1000)) {
-				settingInterface.ACK_vRetGetDeviceVersion(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetGetDeviceVersion(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MSG_ID_CLEAR_DEFENCE_GROUP
 					&& arg1 >= (Constants.MsgSection.MSG_ID_CLEAR_DEFENCE_GROUP - 1000)) {
-				settingInterface.ACK_vRetClearDefenceAreaState(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetClearDefenceAreaState(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MESG_ID_STTING_PIC_REVERSE
 					&& arg1 >= (Constants.MsgSection.MESG_ID_STTING_PIC_REVERSE - 1000)) {
-				settingInterface.ACK_vRetSetImageReverse(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetImageReverse(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MESG_ID_STTING_IR_ALARM_EN
 					&& arg1 >= (Constants.MsgSection.MESG_ID_STTING_IR_ALARM_EN - 1000)) {
-				settingInterface.ACK_vRetSetInfraredSwitch(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetInfraredSwitch(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MESG_STTING_ID_EXTLINE_ALARM_IN_EN
 					&& arg1 >= (Constants.MsgSection.MESG_STTING_ID_EXTLINE_ALARM_IN_EN - 1000)) {
-				settingInterface.ACK_vRetSetWiredAlarmInput(arg1,
-						getConvertAckResult(arg2));
+				settingInterface.ACK_vRetSetWiredAlarmInput(arg1, getConvertAckResult(arg2));
 			} else if (arg1 < Constants.MsgSection.MESG_STTING_ID_EXTLINE_ALARM_OUT_EN
 					&& arg1 >= (Constants.MsgSection.MESG_STTING_ID_EXTLINE_ALARM_OUT_EN - 1000)) {
 				settingInterface.ACK_vRetSetWiredAlarmOut(arg1,
@@ -568,8 +549,7 @@ public class MediaPlayer {
 		}
 	}
 
-	private native void _setVideoSurface(SurfaceView surface)
-			throws IOException;
+	private native void _setVideoSurface(SurfaceView surface) throws IOException;
 
 	public native void _SetMute(boolean isMute) throws IOException;
 
@@ -577,14 +557,11 @@ public class MediaPlayer {
 
 	public native void _SetRecvAVDataEnable(boolean fgRecv);
 
-	private native void _InitSession(int width, int height, int fullScreenSize)
-			throws IllegalStateException;
+	private native void _InitSession(int width, int height, int fullScreenSize) throws IllegalStateException;
 
-	public native void _StartPlaying(int width, int height, int callType)
-			throws IOException, IllegalStateException;
+	public native void _StartPlaying(int width, int height, int callType) throws IOException, IllegalStateException;
 
-	private native void _StartSending(int iFrameRate)
-			throws IllegalStateException;
+	private native void _StartSending(int iFrameRate) throws IllegalStateException;
 
 	private native void _PauseSession() throws IllegalStateException;
 
@@ -611,13 +588,11 @@ public class MediaPlayer {
 	 * P2P connect
 	 */
 
-	private static native final void native_init(int cpuVersion)
-			throws RuntimeException;
+	private static native final void native_init(int cpuVersion) throws RuntimeException;
 
 	private native final void native_setup(Object mediaplayer_this);
 
-	public native int native_p2p_connect(int uID, int password, int code1,
-			int code2, byte[] szMesg, int[] iCustomerID);
+	public native int native_p2p_connect(int uID, int password, int code1, int code2, byte[] szMesg, int[] iCustomerID);
 
 	public native int native_p2p_call(long id, int bMonitor, int password,
 			int iFileIndex, int VideoTrans,byte[] filename, byte[] szMesg, String ipdress);

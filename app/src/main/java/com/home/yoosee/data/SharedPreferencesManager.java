@@ -63,24 +63,20 @@ public class SharedPreferencesManager {
 		return manager;
 	}
 
-	public String getData(Context context, String fileName, String key) {
-		SharedPreferences sf = context.getSharedPreferences(fileName,
-				context.MODE_PRIVATE);
+	public String getData(Context context,String key) {
+		SharedPreferences sf = context.getSharedPreferences(SP_FILE_GWELL, context.MODE_PRIVATE);
 		return sf.getString(key, "");
 	}
 
-	public void putData(Context context, String fileName, String key,
-			String value) {
-		SharedPreferences sf = context.getSharedPreferences(fileName,
-				context.MODE_PRIVATE);
+	public void putData(Context context, String key, String value) {
+		SharedPreferences sf = context.getSharedPreferences(SP_FILE_GWELL, context.MODE_PRIVATE);
 		Editor editor = sf.edit();
 		editor.putString(key, value);
-		editor.commit();
+		editor.apply();
 	}
 
-	public int getIntData(Context context, String fileName, String key) {
-		SharedPreferences sf = context.getSharedPreferences(fileName,
-				context.MODE_PRIVATE);
+	public int getIntData( Context context, String fileName, String key) {
+		SharedPreferences sf = context.getSharedPreferences(SP_FILE_GWELL, context.MODE_PRIVATE);
 		return sf.getInt(key, 0);
 	}
 
