@@ -9,17 +9,12 @@ android {
 
     }
     defaultConfig {
-        minSdkVersion 22
-        targetSdkVersion 25
+        minSdkVersion 16
+        targetSdkVersion 22
         versionCode 7
         versionName "00.46.00.07"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-
-        ndk {
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
-        }
     }
     buildTypes {
         release {
@@ -27,7 +22,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     useLibrary 'org.apache.http.legacy'
 }
 
@@ -38,7 +32,6 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:support-v4:25.3.1'
-//    compile files('src/main/libs/javabase64.jar')
-//    compile files('src/main/libs/universal-image-loader-1.9.3.jar')
+    compile files('libs/javabase64.jar')
     testCompile 'junit:junit:4.12'
 }

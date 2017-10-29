@@ -1,6 +1,7 @@
 package com.home.yoosee.activitys;
 
 import android.app.AlertDialog;
+import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ import com.home.yoosee.global.AccountPersist;
 import com.home.yoosee.global.AppConfig;
 import com.home.yoosee.global.Constants;
 import com.home.yoosee.global.FList;
+import com.home.yoosee.global.MainService;
 import com.home.yoosee.global.NpcCommon;
 import com.home.yoosee.utils.T;
 import com.home.yoosee.utils.Utils;
@@ -101,6 +103,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     if (messageFragment == null) {
                         messageFragment = MessageFragment.newInstance("", "");
                     }
+                    replaceFragment(R.id.content,messageFragment,"");
                     return true;
                 case R.id.navigation_notifications:
 
@@ -163,8 +166,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     private void connect() {
-        Intent service = new Intent(MyApp.MAIN_SERVICE_START);
-        startService(service);
+        final Intent intent = new Intent(this, MainService.class);
+        intent.setAction(MyApp.MAIN_SERVICE_START);
+        startService(intent);
         if (AppConfig.DeBug.isWrightAllLog) {
             Intent log = new Intent(MyApp.LOGCAT);
             log.setPackage(getPackageName());
@@ -173,14 +177,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     private boolean verifyLogin() {
-        Account activeUser = AccountPersist.getInstance().getActiveAccountInfo(
-                mContext);
-
+        Account activeUser = AccountPersist.getInstance().getActiveAccountInfo(mContext);
         if (activeUser != null) {
             NpcCommon.mThreeNum = activeUser.three_number;
             return true;
         }
-
         return false;
     }
 

@@ -9,4 +9,28 @@
         <attr name="metaButtonBarButtonStyle" format="reference" />
     </declare-styleable>
 
+
+
+    <declare-styleable name="RoundAngleImageView">
+        <attr name="roundWidth" format="dimension" />
+        <attr name="roundHeight" format="dimension" />
+    </declare-styleable>
+    <declare-styleable name="DrableButton">
+        <attr name="orientation" format="integer" />
+        <attr name="drawableid" format="reference" />
+        <attr name="drawableidp" format="reference" />
+        <attr name="textid" format="reference" />
+        <attr name="textcolor" format="color" />
+        <attr name="textcolorp" format="color" />
+    </declare-styleable>
+    <declare-styleable name="ImageviewTextView">
+        <attr name="it_orientation" format="integer" />
+        <attr name="it_drawableid" format="reference" />
+        <attr name="it_drawableidp" format="reference" />
+        <attr name="it_drawableidup" format="reference" />
+        <attr name="it_textid" format="reference" />
+        <attr name="it_textcolor" format="color" />
+        <attr name="it_textcolorp" format="color" />
+        <attr name="it_textcolorup" format="color" />
+    </declare-styleable>
 </resources>

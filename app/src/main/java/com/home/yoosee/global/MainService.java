@@ -16,7 +16,7 @@ public class MainService extends Service {
     Context context;
 
     @Override
-    public IBinder onBind(Intent arg0) {
+    public IBinder onBind(Intent intent) {
         return null;
     }
 
@@ -29,7 +29,9 @@ public class MainService extends Service {
     }
 
     @Override
-    public void onStart(Intent intent, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        flags = START_STICKY;
+
         Account account = AccountPersist.getInstance().getActiveAccountInfo(this);
         try {
             int codeStr1 = (int) Long.parseLong(account.rCode1);
@@ -42,7 +44,7 @@ public class MainService extends Service {
                     new P2PConnect(getApplicationContext());
                     new MainThread(context).go();
                 } else {
-                    Log.e("result", "result = " + result);
+                    Log.e("result", "result = " + false);
                 }
             } else {
                 Log.e("account", "account != null");
@@ -50,19 +52,11 @@ public class MainService extends Service {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        super.onStart(intent, startId);
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        // TODO Auto-generated method stub
-        flags = START_STICKY;
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
         MainThread.getInstance().kill();
         P2PHandler.getInstance().p2pDisconnect();
