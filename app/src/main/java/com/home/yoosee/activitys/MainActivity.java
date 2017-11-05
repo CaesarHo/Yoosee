@@ -153,7 +153,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         } else {
             regFilter();
             MyApp.app.getMainHandler().addHandlerPart(this);
-            initView();
             new APList(mContext);
             new FList();
             P2PHandler.getInstance().p2pInit(this, new P2PListener(), new SettingListener());
@@ -171,11 +170,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 tvTitle.setText(getString(R.string.all_tel));
             }
         }
-    }
-
-    public void initView() {
-//        iBtn_left = (ImageButton) findViewById(R.id.ibtn_left);
-//        iBtn_left.setOnClickListener(this);
     }
 
     private void connect() {
