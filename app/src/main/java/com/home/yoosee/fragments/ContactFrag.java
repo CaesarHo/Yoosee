@@ -93,6 +93,8 @@ public class ContactFrag extends Fragment implements View.OnClickListener ,Distr
     RelativeLayout radar_add;
     @BindView(R.id.manually_add)
     RelativeLayout manually_add;
+    @BindView(R.id.layout_no_device)
+    RelativeLayout layout_no_device;
 
 
     // TODO: Rename and change types of parameters
@@ -112,7 +114,6 @@ public class ContactFrag extends Fragment implements View.OnClickListener ,Distr
     NormalDialog dialog;
     private Contact next_contact;
     Handler myHandler = new Handler();
-    //RelativeLayout layout_no_device;
     int count1 = 0;
     int count2 = 0;
 
@@ -204,8 +205,10 @@ public class ContactFrag extends Fragment implements View.OnClickListener ,Distr
         if (localDevices.size() > 0) {
             local_device_bar_top.setVisibility(RelativeLayout.VISIBLE);
             text_local_device_count.setText(String.valueOf(localDevices.size()));
+            layout_no_device.setVisibility(View.GONE);
         } else {
             local_device_bar_top.setVisibility(RelativeLayout.GONE);
+            layout_no_device.setVisibility(View.VISIBLE);
         }
         List<Contact> contacts = DataManager.findContactByActiveUser(mContext, NpcCommon.mThreeNum);
         animation_out = AnimationUtils.loadAnimation(mContext, R.anim.scale_amplify);
@@ -431,11 +434,11 @@ public class ContactFrag extends Fragment implements View.OnClickListener ,Distr
                 } else {
                     local_device_bar_top.setVisibility(RelativeLayout.GONE);
                 }
-//				layout_no_device.setVisibility(RelativeLayout.GONE);
+				layout_no_device.setVisibility(RelativeLayout.GONE);
                 upadataTextView();
                 recyclerView.setVisibility(View.VISIBLE);
             } else if (intent.getAction().equals(Constants.Action.DELETE_DEVICE_ALL)) {
-//				layout_no_device.setVisibility(RelativeLayout.VISIBLE);
+				layout_no_device.setVisibility(RelativeLayout.VISIBLE);
                 recyclerView.setVisibility(View.VISIBLE);
                 upadataTextView();
             } else if (intent.getAction().equals(Constants.Action.ENTER_DEVICE_SETTING)) {
@@ -467,7 +470,6 @@ public class ContactFrag extends Fragment implements View.OnClickListener ,Distr
             }
         }
     };
-
 
     @OnClick({ R.id.radar_add, R.id.manually_add, R.id.local_device_bar_top})
     public void onClick(View v) {

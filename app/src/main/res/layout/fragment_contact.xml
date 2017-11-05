@@ -112,14 +112,9 @@
         android:layout_height="@dimen/add_device_height"
         android:layout_alignParentRight="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/selector_focus_add"
+        android:background="@mipmap/add_frame"
         android:orientation="vertical"
         android:visibility="gone">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"></RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/radar_add"

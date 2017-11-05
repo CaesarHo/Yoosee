@@ -1,9 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.home.yoosee.activitys.AddContactActivity">
+    android:background="@color/white"
+    android:orientation="vertical" >
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        android:id="@+id/layout_toobar"
+        layout="@layout/layout_toolbar"/>
+
+    <LinearLayout
+        android:id="@+id/layout_manually_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/item_left_right_margin"
+        android:layout_marginRight="@dimen/item_left_right_margin"
+        android:layout_marginTop="@dimen/item_group_margin_top"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ctl_setting_bar_height"
+            android:background="@drawable/tiao_bg_up" >
+
+            <EditText
+                android:id="@+id/input_device_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/inner_margin_left"
+                android:layout_marginRight="@dimen/inner_margin_right"
+                android:background="#00000000"
+                android:gravity="left|center_vertical"
+                android:hint="@string/input_device_id"
+                android:inputType="number"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_small_edit" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ctl_setting_bar_height"
+            android:background="@drawable/tiao_bg_center" >
+
+            <EditText
+                android:id="@+id/input_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/inner_margin_left"
+                android:layout_marginRight="@dimen/inner_margin_right"
+                android:background="#00000000"
+                android:gravity="left|center_vertical"
+                android:hint="@string/input_contact_name"
+                android:inputType="text"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_small_edit" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ctl_setting_bar_height"
+            android:background="@drawable/tiao_bg_bottom" >
+
+            <EditText
+                android:id="@+id/input_contact_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/inner_margin_left"
+                android:layout_marginRight="@dimen/inner_margin_right"
+                android:background="#00000000"
+                android:gravity="left|center_vertical"
+                android:hint="@string/input_contact_pwd"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:text=""
+                android:maxLength="30"
+                android:textColor="@color/text_color_black"
+                android:textSize="@dimen/text_size_small_edit" />
+        </RelativeLayout>
+
+        <com.home.yoosee.widget.MyPassLinearLayout
+            android:id="@+id/ll_p"
+            style="@style/ll_my_pas" >
+        </com.home.yoosee.widget.MyPassLinearLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp" >
+
+            <Button
+                android:id="@+id/bt_ensure"
+                style="@style/button_bottom_style"
+                android:text="@string/confirm" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>
