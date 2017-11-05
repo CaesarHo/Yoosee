@@ -63,6 +63,7 @@ import com.p2p.core.update.UpdateManager;
 
 import java.io.File;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -75,7 +76,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private boolean isApEnter = false;
     boolean isRegFilter = false;
 
-    private ImageButton iBtn_left;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.ibtn_right)
+    ImageButton ibtnRight;
+    @BindView(R.id.ibtn_left)
+    ImageButton iBtn_left;
+
+    private int type = 0;
     private CoordinatorMenu mCoordinatorMenu;
     private ContactFrag contactFrag = null;
     private APContactFrag apcontactFrag = null;
@@ -96,6 +104,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             contactFrag = ContactFrag.newInstance("", "");
                         }
                         replaceFragment(R.id.content, contactFrag, "");
+                        tvTitle.setText(getString(R.string.all_tel));
+                        type = 0;
                     }
 
                     return true;
@@ -104,9 +114,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         messageFragment = MessageFragment.newInstance("", "");
                     }
                     replaceFragment(R.id.content,messageFragment,"");
+                    type = 1;
                     return true;
                 case R.id.navigation_notifications:
 
+                    type = 2;
                     return true;
             }
             return false;
@@ -156,13 +168,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     contactFrag = new ContactFrag();
                 }
                 replaceFragment(R.id.content, contactFrag, "");
+                tvTitle.setText(getString(R.string.all_tel));
             }
         }
     }
 
     public void initView() {
-        iBtn_left = (ImageButton) findViewById(R.id.ibtn_left);
-        iBtn_left.setOnClickListener(this);
+//        iBtn_left = (ImageButton) findViewById(R.id.ibtn_left);
+//        iBtn_left.setOnClickListener(this);
     }
 
     private void connect() {
@@ -185,7 +198,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         return false;
     }
 
-    @OnClick({R.id.ibtn_left})
+    @OnClick({R.id.ibtn_left,R.id.ibtn_right})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.ibtn_left:
@@ -193,6 +206,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     mCoordinatorMenu.closeMenu();
                 } else {
                     mCoordinatorMenu.openMenu();
+                }
+                break;
+            case R.id.ibtn_right:
+                if (type == 0){
+                    MyApp.app.getMainHandler().sendEmptyMessage(Constants.Messager.ADD_DEVICE_MSG);
                 }
                 break;
         }

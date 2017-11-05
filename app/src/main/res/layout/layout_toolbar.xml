@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/item_left_right_margin"
-        android:background="@android:drawable/ic_menu_camera" />
+        android:background="@android:drawable/ic_menu_manage" />
 
     <TextView
         android:id="@+id/tv_title"

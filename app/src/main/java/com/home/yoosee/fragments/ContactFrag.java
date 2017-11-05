@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -36,6 +37,8 @@ import com.home.yoosee.activitys.LocalDeviceListActivity;
 import com.home.yoosee.activitys.MainControlActivity;
 import com.home.yoosee.activitys.RadarAddFirstActivity;
 import com.home.yoosee.adapters.MainAdapter;
+import com.home.yoosee.base.DistributedHandler;
+import com.home.yoosee.base.MyApp;
 import com.home.yoosee.data.Contact;
 import com.home.yoosee.data.DataManager;
 import com.home.yoosee.data.SharedPreferencesManager;
@@ -66,7 +69,7 @@ import butterknife.Unbinder;
  * Use the {@link ContactFrag#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactFrag extends Fragment implements View.OnClickListener {
+public class ContactFrag extends Fragment implements View.OnClickListener ,DistributedHandler.HandlerPart{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,8 +77,6 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
     @BindView(R.id.srl)
     SwipeRefreshLayout srl;
     Unbinder unbinder;
-    @BindView(R.id.button_add)
-    ImageView mAddUser;
     @BindView(R.id.pull_refresh_list)
     RecyclerView recyclerView;
     @BindView(R.id.net_status_bar_top)
@@ -100,7 +101,6 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
 
     private OnFragmentInteractionListener mListener;
 
-    public static final int CHANGE_REFRESHING_LABLE = 0x12;
     private Context mContext;
     private boolean isRegFilter = false;
     private boolean isDoorBellRegFilter = false;
@@ -155,6 +155,7 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_contact, container, false);
         mContext = getActivity();
+        MyApp.app.getMainHandler().addHandlerPart(this);
         unbinder = ButterKnife.bind(this, view);
         v = new HeaderTextView(mContext, Utils.getStringByResouceID(R.string.tv_add_device1), Utils.getStringByResouceID(R.string.tv_add_device2));
         Log.e("my", "createContactFrag");
@@ -467,29 +468,10 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
         }
     };
 
-    private Handler mHandler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case CHANGE_REFRESHING_LABLE:
-                    String lable = (String) msg.obj;
-                    // mPullRefreshListView.setHeadLable(lable);
-                    break;
-            }
-            return false;
-        }
-    });
 
-    @OnClick({R.id.button_add, R.id.radar_add, R.id.manually_add, R.id.local_device_bar_top})
+    @OnClick({ R.id.radar_add, R.id.manually_add, R.id.local_device_bar_top})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.button_add:
-                if (!isHideAdd) {
-                    showAdd();
-                } else {
-                    hideAdd();
-                }
-                break;
             case R.id.radar_add:
                 layout_add.setVisibility(LinearLayout.GONE);
                 local_device_bar_top.setClickable(true);
@@ -513,6 +495,25 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public boolean dispatchHandleMessage(Message msg) {
+        switch (msg.what){
+            case Constants.Messager.ADD_DEVICE_MSG:
+                MyApp.app.getMainHandler().removeMessages(Constants.Messager.ADD_DEVICE_MSG);
+                if (isHideAdd) {
+                    showAdd();
+                } else {
+                    hideAdd();
+                }
+                break;
+            case Constants.Messager.CHANGE_REFRESHING_LABLE:
+                String lable = (String) msg.obj;
+                // mPullRefreshListView.setHeadLable(lable);
+                break;
+        }
+        return false;
+    }
+
     private class GetDataTask extends AsyncTask<Void, Void, String[]> {
 
         @Override
@@ -533,9 +534,9 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
             }
 
             Message msg = new Message();
-            msg.what = CHANGE_REFRESHING_LABLE;
+            msg.what = Constants.Messager.CHANGE_REFRESHING_LABLE;
             msg.obj = getString(R.string.pull_to_refresh_refreshing_success_label);
-            mHandler.sendMessage(msg);
+            MyApp.app.getMainHandler().sendMessage(msg);
 
             try {
                 Thread.sleep(1000);
@@ -549,14 +550,16 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
         protected void onPostExecute(String[] result) {
             // mListItems.addFirst("Added after refresh...");
             // Call onRefreshComplete when the list has been refreshed.
-            srl.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    if (srl.isRefreshing()) {
-                        srl.setRefreshing(false);
+            if (srl != null){
+                srl.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (srl.isRefreshing()) {
+                            srl.setRefreshing(false);
+                        }
                     }
-                }
-            }, 2000);
+                }, 2000);
+            }
             super.onPostExecute(result);
         }
     }
@@ -898,6 +901,7 @@ public class ContactFrag extends Fragment implements View.OnClickListener {
         if (isRegFilter) {
             mContext.unregisterReceiver(mReceiver);
         }
+        MyApp.app.getMainHandler().removeHandlerPart(this);
     }
 
     @Override

@@ -10,20 +10,16 @@ public class Constants {
 
 	public static class P2P {
 		// 设备不支持
-		public static final String RET_DEVICE_NOT_SUPPORT = PACKAGE_NAME
-				+ "RET_DEVICE_NOT_SUPPORT";
+		public static final String RET_DEVICE_NOT_SUPPORT = PACKAGE_NAME + "RET_DEVICE_NOT_SUPPORT";
 
 		// 检查密码
-		public static final String ACK_RET_CHECK_PASSWORD = PACKAGE_NAME
-				+ "ACK_RET_CHECK_PASSWORD";
+		public static final String ACK_RET_CHECK_PASSWORD = PACKAGE_NAME + "ACK_RET_CHECK_PASSWORD";
 
 		// 获取设备各种设置
-		public static final String ACK_RET_GET_NPC_SETTINGS = PACKAGE_NAME
-				+ "ACK_RET_GET_NPC_SETTINGS";
+		public static final String ACK_RET_GET_NPC_SETTINGS = PACKAGE_NAME + "ACK_RET_GET_NPC_SETTINGS";
 
 		// 获取布防状态
-		public static final String ACK_RET_GET_DEFENCE_STATES = PACKAGE_NAME
-				+ "ACK_RET_GET_DEFENCE_STATES";
+		public static final String ACK_RET_GET_DEFENCE_STATES = PACKAGE_NAME + "ACK_RET_GET_DEFENCE_STATES";
 
 		// 设备时间相关
 		public static final String ACK_RET_SET_TIME = PACKAGE_NAME
@@ -34,20 +30,14 @@ public class Constants {
 		public static final String RET_GET_TIME = PACKAGE_NAME + "RET_GET_TIME";
 
 		// 视频格式相关
-		public static final String ACK_RET_SET_VIDEO_FORMAT = PACKAGE_NAME
-				+ "ACK_RET_SET_VIDEO_FORMAT";
-		public static final String RET_SET_VIDEO_FORMAT = PACKAGE_NAME
-				+ "RET_SET_VIDEO_FORMAT";
-		public static final String RET_GET_VIDEO_FORMAT = PACKAGE_NAME
-				+ "RET_GET_VIDEO_FORMAT";
+		public static final String ACK_RET_SET_VIDEO_FORMAT = PACKAGE_NAME + "ACK_RET_SET_VIDEO_FORMAT";
+		public static final String RET_SET_VIDEO_FORMAT = PACKAGE_NAME + "RET_SET_VIDEO_FORMAT";
+		public static final String RET_GET_VIDEO_FORMAT = PACKAGE_NAME + "RET_GET_VIDEO_FORMAT";
 
 		// 音量大小相关
-		public static final String ACK_RET_SET_VIDEO_VOLUME = PACKAGE_NAME
-				+ "ACK_RET_SET_VIDEO_VOLUME";
-		public static final String RET_SET_VIDEO_VOLUME = PACKAGE_NAME
-				+ "RET_SET_VIDEO_VOLUME";
-		public static final String RET_GET_VIDEO_VOLUME = PACKAGE_NAME
-				+ "RET_GET_VIDEO_VOLUME";
+		public static final String ACK_RET_SET_VIDEO_VOLUME = PACKAGE_NAME + "ACK_RET_SET_VIDEO_VOLUME";
+		public static final String RET_SET_VIDEO_VOLUME = PACKAGE_NAME + "RET_SET_VIDEO_VOLUME";
+		public static final String RET_GET_VIDEO_VOLUME = PACKAGE_NAME + "RET_GET_VIDEO_VOLUME";
 
 		// 修改设备密码相关
 		public static final String ACK_RET_SET_DEVICE_PASSWORD = PACKAGE_NAME
@@ -795,5 +785,10 @@ public class Constants {
         public static final int CHANGE_ZOOM=1;
 		public static final int CHANGE_FOCUS=2;
 		public static final int CHANGE_FOCUS_ZOOM=3;
+	}
+
+	public static class Messager{
+		public static final int ADD_DEVICE_MSG = 100;
+		public static final int CHANGE_REFRESHING_LABLE = 0x12;
 	}
 }

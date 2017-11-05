@@ -3,38 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true">
-    <RelativeLayout
-        android:id="@+id/layout_title"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
-        android:background="@mipmap/tab_bar"
-        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/all_tel"
-            android:textColor="@color/text_color_white"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/button_add"
-            android:layout_width="@dimen/add_width"
-            android:layout_height="@dimen/add_width"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/add_magin_right"
-            android:background="@mipmap/add"
-            android:scaleType="center" />
-    </RelativeLayout>
     <LinearLayout
         android:id="@+id/layout_net_status_bar_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_title"
         android:orientation="vertical">
 
         <LinearLayout
